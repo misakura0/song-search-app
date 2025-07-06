@@ -2,12 +2,20 @@ import streamlit as st
 import pandas as pd
 import random
 
-# --- スプレッドシートのCSVエクスポートURL（読み取り専用） ---
+# スプレッドシートのCSV URL（すでにあるやつ）
 SPREADSHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/17PoDP9PwRxogzLAP281mMOUv05y5o9EHXZ56lf3C6Zk/export?format=csv"
 
+# ✅ キャッシュ付きでデータを読み込む関数
 @st.cache_data
 def load_data():
     return pd.read_csv(SPREADSHEET_CSV_URL)
+
+# ✅ 再読み込みボタン（押すとキャッシュがクリアされて最新読み込み）
+if st.button("🔄 データを再読み込み"):
+    st.cache_data.clear()
+
+# ✅ 最新データを取得
+df = load_data()
 
 def keyword_match(text, keywords):
     if pd.isna(text):
