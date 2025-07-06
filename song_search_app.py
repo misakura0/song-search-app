@@ -10,10 +10,6 @@ SPREADSHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/17PoDP9PwRxogzLAP2
 def load_data():
     return pd.read_csv(SPREADSHEET_CSV_URL)
 
-# ✅ 再読み込みボタン（押すとキャッシュがクリアされて最新読み込み）
-if st.button("🔄 データを再読み込み"):
-    st.cache_data.clear()
-
 # ✅ 最新データを取得
 df = load_data()
 
@@ -26,6 +22,10 @@ def keyword_match(text, keywords):
 # --- UI ---
 st.title("⚔️ミュージカル刀剣乱舞　曲名・歌唱者・公演検索")
 
+# ✅ 再読み込みボタン（押すとキャッシュがクリアされて最新読み込み）
+if st.button("🔄 データを再読み込み"):
+    st.cache_data.clear()
+    
 # 入力フォーム
 title_query = st.text_input("🔍 曲名で検索（部分一致可）")
 singer_query = st.text_input("🎤歌唱者で検索（部分一致・複数名対応）")
