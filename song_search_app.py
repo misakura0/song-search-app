@@ -65,15 +65,18 @@ if not results.empty:
     results["選択キー"] = results["曲名"] + "（" + results["公演名"] + "）"
     selected_key = st.selectbox("🔍 詳細を見たい曲を選んでください", results["選択キー"])
 
+# 選択された行を抽出して表示（選択されているときだけ）
+if selected_key:
+    selected_row = results[results["選択キー"] == selected_key].iloc[0]
 
-    # 📝 詳細表示（マークダウンで整形）
+    # 📝 詳細表示
     st.markdown("### 🎶 詳細情報")
-    st.markdown(f" 曲名: {selected_row['曲名']}")
-    st.markdown(f" 歌唱者: {selected_row['歌唱者']}")
-    st.markdown(f" 公演名: {selected_row['公演名']}")
-    st.markdown(f" 見られるところ: {selected_row['見られるところ']}")
-    st.markdown(f" 備考: {selected_row['備考']}")
-
+    st.markdown(f"**曲名**: {selected_row['曲名']}")
+    st.markdown(f"**歌唱者**: {selected_row['歌唱者']}")
+    st.markdown(f"**公演名**: {selected_row['公演名']}")
+    st.markdown(f"**見られるところ**: {selected_row['見られるところ']}")
+    st.markdown(f"**備考**: {selected_row['備考']}")
+    
 # 🎲 ランダムで1件表示
 if not results.empty:
     if st.button("🎲 ランダムに1件表示する"):
