@@ -79,11 +79,11 @@ if not results.empty:
 
     # 📝 詳細表示（マークダウンで整形）
     st.markdown("### 🎶 詳細情報")
-    st.markdown(f"** 曲名:** {selected_row['曲名']}")
-    st.markdown(f"** 歌唱者:** {selected_row['歌唱者']}")
-    st.markdown(f"** 公演名:** {selected_row['公演名']}")
-    st.markdown(f"** 見られるところ:** {selected_row['見られるところ']}")
-    st.markdown(f"** 備考:** {selected_row['備考']}")
+    st.markdown(f" 曲名: {selected_row['曲名']}")
+    st.markdown(f" 歌唱者: {selected_row['歌唱者']}")
+    st.markdown(f" 公演名: {selected_row['公演名']}")
+    st.markdown(f" 見られるところ: {selected_row['見られるところ']}")
+    st.markdown(f" 備考: {selected_row['備考']}")
 else:
     st.info("一致するデータが見つかりませんでした。")
 
