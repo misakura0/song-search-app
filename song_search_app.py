@@ -71,8 +71,10 @@ highlighted_results["曲名"] = highlighted_results["曲名"].apply(lambda x: hi
 highlighted_results["歌唱者"] = highlighted_results["歌唱者"].apply(lambda x: highlight_keywords(x, keywords_singer))
 
 # 📊 表示を HTML で整形（太字ハイライト付き）
-st.markdown(highlighted_results[existing_cols].to_html(escape=False, index=False), unsafe_allow_html=True)
-    # 選択された行を抽出して表示
+st.markdown(f"**曲名**: {highlight_keywords(selected_row['曲名'], keywords_title)}", unsafe_allow_html=True)
+st.markdown(f"**歌唱者**: {highlight_keywords(selected_row['歌唱者'], keywords_singer)}", unsafe_allow_html=True)# 🔍 選択された行を抽出して表示
+
+if selected_key:
     selected_row = results[results["選択キー"] == selected_key].iloc[0]
 
     # 📝 詳細表示（マークダウンで整形）
