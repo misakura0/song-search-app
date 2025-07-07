@@ -91,6 +91,13 @@ if not results.empty:
         for col in ["曲名", "歌唱者", "公演名", "見られるところ", "備考"]:
             if col in random_row:
                 st.write(f"**{col}**: {random_row[col]}")
+
+  # 太字ハイライト用に変換
+        for col in ["曲名", "歌唱者", "公演名", "見られるところ", "備考"]:
+            if col in random_row:
+                val = highlight_keywords(random_row[col], keywords_title + keywords_singer)
+                st.write(f"**{col}**: ", unsafe_allow_html=True)
+                st.markdown(val, unsafe_allow_html=True)
 else:
     st.info("一致するデータが見つかりませんでした。")
 
