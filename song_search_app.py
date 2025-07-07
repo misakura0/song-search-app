@@ -53,15 +53,6 @@ if not results.empty and "公演名" in results.columns:
     if selected_stage != "すべて":
         results = results[results["公演名"] == selected_stage]
 
-# 🎲 ランダムで1件表示
-if not results.empty:
-    if st.button("🎲 ランダムに1件表示する"):
-        random_row = results.sample(1).iloc[0]
-        st.markdown("### 🎯 ランダム表示結果")
-        for col in ["曲名", "歌唱者", "公演名", "見られるところ", "備考"]:
-            if col in random_row:
-                st.write(f"**{col}**: {random_row[col]}")
-
 # 📊 検索結果の表表示
 st.write(f"🔎 一致した結果：{len(results)}件")
 
@@ -84,6 +75,15 @@ if not results.empty:
     st.markdown(f" 公演名: {selected_row['公演名']}")
     st.markdown(f" 見られるところ: {selected_row['見られるところ']}")
     st.markdown(f" 備考: {selected_row['備考']}")
+
+# 🎲 ランダムで1件表示
+if not results.empty:
+    if st.button("🎲 ランダムに1件表示する"):
+        random_row = results.sample(1).iloc[0]
+        st.markdown("### 🎯 ランダム表示結果")
+        for col in ["曲名", "歌唱者", "公演名", "見られるところ", "備考"]:
+            if col in random_row:
+                st.write(f"**{col}**: {random_row[col]}")
 else:
     st.info("一致するデータが見つかりませんでした。")
 
