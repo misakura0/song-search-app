@@ -62,13 +62,28 @@ if not results.empty:
             if col in random_row:
                 st.write(f"**{col}**: {random_row[col]}")
 
-# 📊 結果表示
+# 📊 検索結果の表表示
 st.write(f"🔎 一致した結果：{len(results)}件")
 
 if not results.empty:
     expected_cols = ["曲名", "歌唱者", "公演名", "見られるところ", "備考"]
     existing_cols = [col for col in expected_cols if col in results.columns]
     st.dataframe(results[existing_cols])
+
+    # 🎵 曲名＋公演名のセットで選択肢を作成（曲名が重複しても識別できるように）
+    results["選択キー"] = results["曲名"] + "（" + results["公演名"] + "）"
+    selected_key = st.selectbox("🔍 詳細を見たい曲を選んでください", results["選択キー"])
+
+    # 選択された行を抽出して表示
+    selected_row = results[results["選択キー"] == selected_key].iloc[0]
+
+    # 📝 詳細表示（マークダウンで整形）
+    st.markdown("### 🎶 詳細情報")
+    st.markdown(f"**🎵 曲名:** {selected_row['曲名']}")
+    st.markdown(f"**🎤 歌唱者:** {selected_row['歌唱者']}")
+    st.markdown(f"**🎭 公演名:** {selected_row['公演名']}")
+    st.markdown(f"**📺 見られるところ:** {selected_row['見られるところ']}")
+    st.markdown(f"**📝 備考:** {selected_row['備考']}")
 else:
     st.info("一致するデータが見つかりませんでした。")
 
