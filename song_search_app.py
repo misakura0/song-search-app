@@ -25,12 +25,12 @@ st.title("⚔️ミュージカル刀剣乱舞　曲名・歌唱者・公演検�
 # ✅ 再読み込みボタン（押すとキャッシュがクリアされて最新読み込み）
 if st.button("🔄 データを再読み込み"):
     st.cache_data.clear()
-    
+
 # 入力フォーム
 title_query = st.text_input("🔍 曲名で検索（部分一致可）")
 singer_query = st.text_input("🎤歌唱者で検索（部分一致・複数名対応）")
 
-# データ読み込み
+# データ再取得
 df = load_data()
 
 # クエリ処理
@@ -59,17 +59,16 @@ st.write(f"🔎 一致した結果：{len(results)}件")
 if not results.empty:
     expected_cols = ["曲名", "歌唱者", "公演名", "見られるところ", "備考"]
     existing_cols = [col for col in expected_cols if col in results.columns]
+
+    # 表のインデックスが表示されるように
     st.dataframe(results[existing_cols])
 
-    # 🎵 曲名＋公演名のセットで選択肢を作成（曲名が重複しても識別できるように）
-    results["選択キー"] = results["曲名"] + "（" + results["公演名"] + "）"
-    selected_key = st.selectbox("🔍 詳細を見たい曲を選んでください", results["選択キー"])
+    # ✅ インデックスから選択
+    selected_index = st.selectbox("🔢 表の左の番号から詳細を選んでね", results.index.tolist())
 
-# 選択された行を抽出して表示（選択されているときだけ）
-if selected_key:
-    selected_row = results[results["選択キー"] == selected_key].iloc[0]
+    # ✅ 選ばれた行を取得して詳細表示
+    selected_row = results.loc[selected_index]
 
-    # 📝 詳細表示
     st.markdown("### 🎶 詳細情報")
     st.markdown(f"**曲名**: {selected_row['曲名']}")
     st.markdown(f"**歌唱者**: {selected_row['歌唱者']}")
@@ -77,14 +76,13 @@ if selected_key:
     st.markdown(f"**見られるところ**: {selected_row['見られるところ']}")
     st.markdown(f"**備考**: {selected_row['備考']}")
     
-# 🎲 ランダムで1件表示
-if not results.empty:
+    # 🎲 ランダム表示
     if st.button("🎲 ランダムに1件表示する"):
         random_row = results.sample(1).iloc[0]
         st.markdown("### 🎯 ランダム表示結果")
-        for col in ["曲名", "歌唱者", "公演名", "見られるところ", "備考"]:
+        for col in expected_cols:
             if col in random_row:
                 st.write(f"**{col}**: {random_row[col]}")
+
 else:
     st.info("一致するデータが見つかりませんでした。")
-
