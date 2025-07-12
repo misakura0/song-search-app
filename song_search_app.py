@@ -91,5 +91,9 @@ if not results.empty:
             if col in random_row:
                 st.write(f"**{col}**: {random_row[col]}")
 
+　　#アンケート
+　　st.markdown("⇓⇓⇓ミスを見つけた方や感想のある方はよかったらこのフォームまでお願いします。")
+　　st.markdown("https://forms.gle/Cmpnr2iH8k1eK9kM9")
+
 else:
     st.info("一致するデータが見つかりませんでした。")
