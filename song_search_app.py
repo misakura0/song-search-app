@@ -64,7 +64,7 @@ if not results.empty:
     st.dataframe(results[existing_cols])
 
     # ✅ インデックスから選択
-    selected_index = st.selectbox("🔢 表の左の番号から詳細を選んでね", results.index.tolist())
+    selected_index = st.selectbox("表から詳細を見たい物の番号を選んでね", results.index.tolist())
 
     # ✅ 選ばれた行を取得して詳細表示
     selected_row = results.loc[selected_index]
