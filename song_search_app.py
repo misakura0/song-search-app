@@ -22,6 +22,22 @@ def keyword_match(text, keywords):
 # --- UI ---
 st.title("⚔️ミュージカル刀剣乱舞　曲名・歌唱者・公演検索")
 
+# Google Analytics タグを埋め込み
+st.markdown(
+    """
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BXXKLCT4K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2BXXKLCT4K');
+    </script>
+    """,
+    unsafe_allow_html=True
+)
+
 st.markdown("ミュージカル刀剣乱舞の2部と祭り公演の曲名、歌唱者、見れるところを簡単に調べられるサイトです。")
 st.markdown("検索したい**曲名**や**刀剣男士の名前**を入力すると、それに一致したものが下の表に表示されます。")
 st.markdown("例①加州は悲劇誰と歌ったことあるっけ？⇒曲名　美しい悲劇、歌唱者　加州で検索")
