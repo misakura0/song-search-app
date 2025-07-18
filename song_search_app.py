@@ -56,6 +56,12 @@ if st.button("🔄 データを再読み込み"):
 title_query = st.text_input("🔍 曲名で検索（部分一致可）")
 singer_query = st.text_input("🎤歌唱者で検索（部分一致・複数名対応）")
 
+# ✅ 人数絞り込みチェックボックス
+st.subheader("👥 曲の人数で絞り込み")
+filter_solo = st.checkbox("✅ ソロ曲（1人）", value=True)
+filter_duo = st.checkbox("✅ デュオ曲（2人）", value=True)
+filter_3plus = st.checkbox("✅ 3人以上の曲", value=True)
+
 # ✅ キーワード分解
 def keyword_match(text, keywords):
     if pd.isna(text):
@@ -66,6 +72,14 @@ def keyword_match(text, keywords):
 keywords_title = [kw.strip().lower() for kw in title_query.split()] if title_query else []
 keywords_singer = [kw.strip().lower() for kw in singer_query.split()] if singer_query else []
 
+# ✅ 歌唱者人数カウント関数
+def count_singers(s):
+    if pd.isna(s) or s.strip() == "":
+        return 0
+    return len(s.split("、"))
+
+df["人数"] = df["歌唱者"].apply(count_singers)
+
 # ✅ 検索処理
 def row_matches(row):
     title_match = keyword_match(row["曲名"], keywords_title) if keywords_title else True
@@ -73,6 +87,12 @@ def row_matches(row):
     return title_match and singer_match
 
 results = df[df.apply(row_matches, axis=1)]
+
+# ✅ 人数フィルター
+temp = pd.DataFrame(results)
+results = temp[((filter_solo & (temp["人数"] == 1)) |
+                (filter_duo & (temp["人数"] == 2)) |
+                (filter_3plus & (temp["人数"] >= 3)))]
 
 # ✅ 公演名絞り込み
 if not results.empty and "公演名" in results.columns:
@@ -88,10 +108,8 @@ if not results.empty:
     expected_cols = ["曲名", "歌唱者", "公演名", "見られるところ", "備考"]
     existing_cols = [col for col in expected_cols if col in results.columns]
 
-    # ✅ 表表示（右上のダウンロードボタンは非表示！）
     st.dataframe(results[existing_cols])
 
-    # ✅ 詳細表示：行番号で選択
     selected_index = st.selectbox("表から詳細を見たい物の番号を選んでね", results.index.tolist())
     selected_row = results.loc[selected_index]
 
@@ -102,7 +120,6 @@ if not results.empty:
     st.markdown(f"**見られるところ**: {selected_row['見られるところ']}")
     st.markdown(f"**備考**: {selected_row['備考']}")
 
-    # ✅ ランダム表示
     if st.button("🎲 ランダムに1件表示する"):
         random_row = results.sample(1).iloc[0]
         st.markdown("### 🎯 ランダム表示結果")
