@@ -92,10 +92,9 @@ def row_matches(row):
 results = df[df.apply(row_matches, axis=1)]
 
 # ✅ 人数フィルター
-temp = pd.DataFrame(results)
-results = temp[((filter_solo & (temp["人数"] == 1)) |
-                (filter_duo & (temp["人数"] == 2)) |
-                (filter_3plus & (temp["人数"] >= 3)))]
+results = temp[((solo & (temp["人数"] == 1)) |
+                (duo & (temp["人数"] == 2)) |
+                (three_or_more & (temp["人数"] >= 3)))]
 
 # ✅ 公演名絞り込み
 if not results.empty and "公演名" in results.columns:
