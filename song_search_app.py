@@ -57,10 +57,8 @@ title_query = st.text_input("🔍 曲名で検索（部分一致可）")
 singer_query = st.text_input("🎤歌唱者で検索（部分一致・複数名対応）")
 
 # ✅ 人数絞り込みチェックボックス
-st.subheader("👥 曲の人数で絞り込み")
-filter_solo = st.checkbox("✅ ソロ曲（1人）", value=True)
-filter_duo = st.checkbox("✅ デュオ曲（2人）", value=True)
-filter_3plus = st.checkbox("✅ 3人以上の曲", value=True)
+filter_solo = st.checkbox("ソロ", value=True)
+filter_duo = st.checkbox("デュオ", value=True)
 
 # ✅ キーワード分解
 def keyword_match(text, keywords):
