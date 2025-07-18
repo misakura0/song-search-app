@@ -56,11 +56,14 @@ if st.button("🔄 データを再読み込み"):
 title_query = st.text_input("🔍 曲名で検索（部分一致可）")
 singer_query = st.text_input("🎤歌唱者で検索（部分一致・複数名対応）")
 
-# ✅ 人数絞り込みチェックボックス
-st.subheader(" 曲の人数で絞り込み")
-filter_solo = st.checkbox(" ソロ曲", value=True)
-filter_duo = st.checkbox(" デュオ曲", value=True)
-filter_3plus = st.checkbox(" 3人以上の曲", value=True)
+# ✅ 曲の人数で絞り込み（ラベルなし＆横並び）
+col1, col2, col3 = st.columns(3)
+with col1:
+    solo = st.checkbox("ソロ", value=True)
+with col2:
+    duo = st.checkbox("デュオ", value=True)
+with col3:
+    three_or_more = st.checkbox("3人以上", value=True)
 
 # ✅ キーワード分解
 def keyword_match(text, keywords):
