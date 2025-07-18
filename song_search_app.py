@@ -79,11 +79,11 @@ results = df[df.apply(row_matches, axis=1)]
 # ✅ 人数での絞り込みチェックボックス（横並び）
 col1, col2, col3 = st.columns(3)
 with col1:
-    filter_solo = st.checkbox("✅ ソロ曲（1人）", value=True)
+    filter_solo = st.checkbox("ソロ", value=True)
 with col2:
-    filter_duo = st.checkbox("✅ デュオ曲（2人）", value=True)
+    filter_duo = st.checkbox("デュオ", value=True)
 with col3:
-    filter_multi = st.checkbox("✅ 3人以上の曲", value=True)
+    filter_multi = st.checkbox("3人以上", value=True)
 
 # ✅ 人数フィルターを適用
 filters = []
