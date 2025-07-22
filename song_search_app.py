@@ -94,11 +94,14 @@ if filter_multi:
 if filters:
     results = results[pd.concat(filters, axis=1).any(axis=1)]
 
-# ✅ 公演名絞り込み（複数選択対応＆出現順）
+# ✅ 公演名で絞り込み（複数選択＆「すべて」対応）
 if not results.empty and "公演名" in results.columns:
     unique_stages = results["公演名"].dropna().drop_duplicates().tolist()
-    selected_stages = st.multiselect("公演名で絞り込み（複数選択可）", options=unique_stages, default=unique_stages)
-    results = results[results["公演名"].isin(selected_stages)]
+    stage_options = ["すべて"] + unique_stages
+    selected_stages = st.multiselect(" 公演名で絞り込み", stage_options, default=["すべて"])
+
+    if "すべて" not in selected_stages:
+        results = results[results["公演名"].isin(selected_stages)]
 
 # ✅ 表の表示
 st.write(f"🔎 一致した結果：{len(results)}件")
