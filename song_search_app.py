@@ -14,21 +14,18 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ✅ Google Analytics タグ（オプション）
-st.markdown(
-    """
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BXXKLCT4K"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-2BXXKLCT4K');
-    </script>
-    """,
-    unsafe_allow_html=True
-)
-
+# ✅ 公演名選択チップの色をカスタマイズ
+st.markdown("""
+    <style>
+    .stMultiSelect [data-baseweb="tag"] {
+        background-color:#e2e3e5!important;
+        color: black !important;
+    }
+    .stMultiSelect [data-baseweb="tag"] svg {
+        fill: black !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
 # ✅ 説明文
 st.title("⚔️ミュージカル刀剣乱舞　曲名・歌唱者・公演検索")
 st.markdown("ミュージカル刀剣乱舞の本公演などの2部とお祭り公演で**歌われた曲**、**歌唱者**、**何で見れるか**を簡単に調べられるサイトです。")
