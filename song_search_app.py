@@ -1,4 +1,9 @@
 import streamlit as st
+st.set_page_config(
+    page_title="刀ミュ曲名・歌唱者検索アプリ",
+    page_icon="⚔️",
+    layout="wide",
+)
 import pandas as pd
 import random
 
