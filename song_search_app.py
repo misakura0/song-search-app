@@ -109,6 +109,11 @@ if not results.empty and "公演名" in results.columns:
     if "すべて" not in selected_stages:
         results = results[results["公演名"].isin(selected_stages)]
 
+# ✅ フィルターリセットボタン（たとえば検索フォームの下などに設置）
+if st.button("🔁絞り込み条件をリセット"):
+    st.experimental_rerun()
+
+
 # ✅ 表の表示
 st.write(f"🔎 一致した結果：{len(results)}件")
 
@@ -125,6 +130,7 @@ if not results.empty:
     st.markdown(f"**曲名**: {selected_row['曲名']}")
     st.markdown(f"**歌唱者**: {selected_row['歌唱者']}")
     st.markdown(f"**公演名**: {selected_row['公演名']}")
+    st.markdown(f"<span style='background-color:#e2e3e5; padding:4px 8px; border-radius:10px; display:inline-block'>{selected_row['公演名']}</span>", unsafe_allow_html=True)
     st.markdown(f"**見られるところ**: {selected_row['見られるところ']}")
     st.markdown(f"**備考**: {selected_row['備考']}")
 
