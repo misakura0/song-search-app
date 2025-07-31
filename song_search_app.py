@@ -51,7 +51,7 @@ def load_data():
 df = load_data()
 
 # ✅ 再読み込みボタン
-if st.button("🔄 データを再読み込み"):
+if st.button("データを再読み込み"):
     st.cache_data.clear()
     df = load_data()
 
