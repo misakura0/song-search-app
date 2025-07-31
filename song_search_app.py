@@ -109,10 +109,6 @@ if not results.empty and "公演名" in results.columns:
     if "すべて" not in selected_stages:
         results = results[results["公演名"].isin(selected_stages)]
 
-# ✅ フィルターリセットボタン（たとえば検索フォームの下などに設置）
-if st.button("🔁絞り込み条件をリセット"):
-    st.experimental_rerun()
-
 
 # ✅ 表の表示
 st.write(f"🔎 一致した結果：{len(results)}件")
