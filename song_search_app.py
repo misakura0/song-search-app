@@ -130,7 +130,6 @@ if not results.empty:
     st.markdown(f"**曲名**: {selected_row['曲名']}")
     st.markdown(f"**歌唱者**: {selected_row['歌唱者']}")
     st.markdown(f"**公演名**: {selected_row['公演名']}")
-    st.markdown(f"<span style='background-color:#e2e3e5; padding:4px 8px; border-radius:10px; display:inline-block'>{selected_row['公演名']}</span>", unsafe_allow_html=True)
     st.markdown(f"**見られるところ**: {selected_row['見られるところ']}")
     st.markdown(f"**備考**: {selected_row['備考']}")
 
