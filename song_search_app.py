@@ -1,6 +1,6 @@
 import streamlit as st
 st.set_page_config(
-    page_title="刀ミュ曲名・歌唱者検索アプリ",
+    page_title="刀ミュ曲名・歌唱者検索",
     page_icon="⚔️",
     layout="wide",
 )
