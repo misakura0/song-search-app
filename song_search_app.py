@@ -138,9 +138,9 @@ if not results.empty and "区分" in results.columns:
 
     s1, s2, s3, s4 = st.columns(4)
     with s1:
-        chk_1 = st.checkbox("1部", value=True)
+        chk_1 = st.checkbox("１部", value=True)
     with s2:
-        chk_2 = st.checkbox("2部", value=True)
+        chk_2 = st.checkbox("２部", value=True)
     with s3:
         chk_fes = st.checkbox("祭り", value=True)
     with s4:
@@ -148,9 +148,9 @@ if not results.empty and "区分" in results.columns:
 
     section_filters = []
     if chk_1:
-        section_filters.append(results["区分"] == "1部")
+        section_filters.append(results["区分"] == "１部")
     if chk_2:
-        section_filters.append(results["区分"] == "2部")
+        section_filters.append(results["区分"] == "２部")
     if chk_fes:
         section_filters.append(results["区分"] == "祭り")
     if chk_other:
