@@ -160,7 +160,7 @@ if not results.empty and "区分" in results.columns:
 st.write(f"🔎 一致した結果：{len(results)} 件")
 
 if not results.empty:
-    expected_cols = ["曲名", "区分", "歌唱者", "公演名", "見られるところ", "備考"]
+    expected_cols = ["曲名", "歌唱者", "公演名", "区分", "見られるところ", "備考"]
     cols = [c for c in expected_cols if c in results.columns]
 
     st.dataframe(results[cols])
@@ -173,9 +173,9 @@ if not results.empty:
 
     st.markdown("### 🎶 詳細情報")
     st.markdown(f"**曲名**：{row['曲名']}")
-    st.markdown(f"**区分**：{row['区分']}")
     st.markdown(f"**歌唱者**：{row['歌唱者']}")
     st.markdown(f"**公演名**：{row['公演名']}")
+    st.markdown(f"**区分**：{row['区分']}")
     st.markdown(f"**見られるところ**：{row['見られるところ']}")
     st.markdown(f"**備考**：{row['備考']}")
 
